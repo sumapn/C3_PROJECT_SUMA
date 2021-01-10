@@ -74,6 +74,10 @@ public class Restaurant {
         return name;
     }
 
+    public int displaytotalPriceOfTheItems(List<String> itemNames){
 
+        return 0;  //returning dummy value
+
+    }
 
 }

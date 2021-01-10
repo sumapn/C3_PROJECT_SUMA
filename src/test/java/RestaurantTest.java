@@ -1,16 +1,12 @@
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Spy;
 
-import java.time.Clock;
-import java.time.Instant;
 import java.time.LocalTime;
-import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.when;
 
 class RestaurantTest {
 
@@ -26,7 +22,7 @@ class RestaurantTest {
     @Test
     public void is_restaurant_open_should_return_false_if_time_is_outside_opening_and_closing_time(){
         Restaurant restaurantSpy = spy(restaurant);
-        when(restaurantSpy.getCurrentTime()).thenReturn(LocalTime.of(6, 00, 00));
+        when(restaurantSpy.getCurrentTime()).thenReturn(LocalTime.of(6, 0, 0));
 
         boolean result = restaurantSpy.isRestaurantOpen();
         assertFalse(result);
@@ -72,5 +68,22 @@ class RestaurantTest {
                 ()->restaurant.removeFromMenu("French fries"));
     }
     //<<<<<<<<<<<<<<<<<<<<<<<MENU>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+    @Test
+    public void display_of_totalPrice_correct(){
+        LocalTime openingTime = LocalTime.parse("10:30:00");
+        LocalTime closingTime = LocalTime.parse("22:00:00");
+        restaurant =new Restaurant("BBB","Blr",openingTime,closingTime);
+
+        restaurant.addToMenu("idli",40);
+        restaurant.addToMenu("vada", 60);
+        restaurant.addToMenu("dosa", 160);
+        restaurant.addToMenu("upma", 130);
+        List<String> itemname = new ArrayList<>();
+        itemname.add("idli");
+        itemname.add("vada");
+        itemname.add("dosa");
+        assertEquals(260,restaurant.displaytotalPriceOfTheItems(itemname));
+
+    }
 
 }
