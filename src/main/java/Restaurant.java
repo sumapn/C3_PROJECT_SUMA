@@ -2,6 +2,7 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.time.format.DateTimeFormatter;
 
 public class Restaurant {
     private String name;
@@ -17,16 +18,26 @@ public class Restaurant {
         this.closingTime = closingTime;
     }
 
+
+
     public boolean isRestaurantOpen() {
-        return true;
-        //DELETE ABOVE STATEMENT AND WRITE CODE HERE
+        int currentTime = getCurrentTime().toSecondOfDay();
+        if((currentTime >= this.openingTime.toSecondOfDay()) && (currentTime <= closingTime.toSecondOfDay())){
+            System.out.println("Open");
+            return true;
+        } else {
+            System.out.println("Close");
+            return false;
+        }
     }
 
-    public LocalTime getCurrentTime(){ return  LocalTime.now(); }
+    public LocalTime getCurrentTime() {
+        return  LocalTime.now();
+    }
 
     public List<Item> getMenu() {
-        return null;
-        //DELETE ABOVE RETURN STATEMENT AND WRITE CODE HERE
+        return menu;
+
     }
 
     private Item findItemByName(String itemName){
@@ -62,5 +73,7 @@ public class Restaurant {
     public String getName() {
         return name;
     }
+
+
 
 }
