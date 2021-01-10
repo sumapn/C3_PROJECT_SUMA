@@ -69,7 +69,7 @@ class RestaurantTest {
     }
     //<<<<<<<<<<<<<<<<<<<<<<<MENU>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
     @Test
-    public void display_of_totalPrice_correct(){
+    public void display_of_totalPrice_is_Not_correct(){
         LocalTime openingTime = LocalTime.parse("10:30:00");
         LocalTime closingTime = LocalTime.parse("22:00:00");
         restaurant =new Restaurant("BBB","Blr",openingTime,closingTime);
@@ -85,5 +85,23 @@ class RestaurantTest {
         assertEquals(260,restaurant.displaytotalPriceOfTheItems(itemname));
 
     }
+    @Test
+    public void display_of_totalPrice_correct(){
+        LocalTime openingTime = LocalTime.parse("10:30:00");
+        LocalTime closingTime = LocalTime.parse("22:00:00");
+        restaurant =new Restaurant("BBB","Blr",openingTime,closingTime);
+
+        restaurant.addToMenu("idli",40);
+        restaurant.addToMenu("vada", 60);
+        restaurant.addToMenu("dosa", 160);
+        restaurant.addToMenu("upma", 130);
+        List<String> itemname = new ArrayList<String>();
+        itemname.add("idli");
+        itemname.add("vada");
+        itemname.add("dosa");
+        assertEquals(260,restaurant.displaytotalPriceOfTheItems(itemname));
+
+    }
+
 
 }
